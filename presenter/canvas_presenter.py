@@ -1,6 +1,7 @@
 from algo.sample_processing import prepare_trace
 from presenter.sound_reader import SoundReader
-from view.canvas_panel import LEFT_TOP_GRID_X_POSITION, GRID_WIDTH, GRID_HEIGHT, LEFT_TOP_GRID_Y_POSITION
+from view.canvas_panel import LEFT_TOP_GRID_X_POSITION, GRID_WIDTH, GRID_HEIGHT, LEFT_TOP_GRID_Y_POSITION, ROWS, \
+    DECIBELS_PER_ROW
 
 __author__ = 'novy'
 
@@ -38,16 +39,21 @@ class CanvasPresenter(object):
         ]
 
     def _scale_power_points(self, power_points):
-        # todo: fix scaling
-        min_power = min(power_points)
-        max_power = max(power_points)
-        power_range = max_power - min_power
-        pixels_per_power_point = GRID_HEIGHT / power_range
+        # todo this should be probably done in a smarter way...
+        with_negative_power_replaced = [
+            power if power >= 0 else 0 for power in power_points
+        ]
 
-        power_points_shifted = power_points + (abs(min_power) if min_power < 0 else 0)
+        pixels_per_decibel = float(GRID_HEIGHT) / (ROWS * DECIBELS_PER_ROW)
+
+        scaled = [
+            int(GRID_HEIGHT - power * pixels_per_decibel)
+            for power in with_negative_power_replaced
+        ]
+
         return [
-            power * pixels_per_power_point + LEFT_TOP_GRID_Y_POSITION
-            for power in power_points_shifted
+            LEFT_TOP_GRID_Y_POSITION if power < LEFT_TOP_GRID_Y_POSITION else power
+            for power in scaled
         ]
 
     def _make_canvas_input(self, x, y):
