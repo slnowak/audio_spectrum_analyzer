@@ -2,4 +2,4 @@ from view.main_view import MainWindow
 
 __author__ = 'novy'
 
-MainWindow()
+m = MainWindow()

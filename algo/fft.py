@@ -20,9 +20,9 @@ def __fft(signal):
 
         combined = [0] * signal_length
 
-        for i in xrange(signal_length/2):
+        for i in xrange(signal_length / 2):
             combined[i] = even_part[i] + omega(signal_length, -i) * odd_part[i]
-            combined[i + signal_length/2] = even_part[i] - omega(signal_length, -i) * odd_part[i]
+            combined[i + signal_length / 2] = even_part[i] - omega(signal_length, -i) * odd_part[i]
 
         return combined
 
@@ -33,7 +33,7 @@ def omega(p, q):
 
 def get_nearest_greater_power_of_two(number):
     return int(2 ** math.ceil(np.log2(number)))
-    
+
 
 def pad(input_list):
     list_length = len(input_list)
