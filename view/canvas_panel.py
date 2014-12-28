@@ -1,5 +1,6 @@
-from Tkconstants import RIDGE, TOP, X
-from Tkinter import Frame, Canvas
+from Tkconstants import RIDGE, TOP, X, RIGHT, LEFT
+from Tkinter import Frame, Canvas, Button
+from view.bottom_panel import BUTTON_WIDTH
 
 __author__ = 'novy'
 
@@ -34,6 +35,7 @@ class CanvasPanel(Frame):
         self.presenter = presenter
 
         self.canvas = self._init_canvas()
+        self._init_buttons()
 
     def _init_canvas(self):
         canvas = Canvas(self, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, background=CANVAS_BACKGROUND)
@@ -78,7 +80,7 @@ class CanvasPanel(Frame):
 
         descriptions = [
             (line[0], line[3] + 10, str(freq_range['min'] + i * freq_per_column))
-            for i, line in zip(xrange(COLUMNS + 1), lines)[1:]
+            for i, line in zip(xrange(COLUMNS + 1), lines)
         ]
 
         self._draw_descriptions(descriptions)
@@ -105,3 +107,14 @@ class CanvasPanel(Frame):
                 description[0], description[1],
                 text=description[2], fill=GRID_COLOR
             )
+
+    def _init_buttons(self):
+        self.start_freq_button = self.__init_button(button_caption="Start freq", button_position=LEFT,
+                                                    button_callback=self.presenter.read_start_freq)
+        self.end_freq_button = self.__init_button(button_caption="End freq", button_position=RIGHT,
+                                                  button_callback=self.presenter.read_stop_freq)
+
+    def __init_button(self, button_caption, button_position, button_callback=None):
+        button = Button(self, text=button_caption, width=BUTTON_WIDTH, command=button_callback)
+        button.pack(side=button_position, padx=5, pady=5)
+        return button
