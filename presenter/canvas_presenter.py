@@ -24,6 +24,7 @@ class CanvasPresenter(object):
 
     def draw_spectrum(self, sound_sample):
         frequency, power = prepare_trace(sound_sample, self.sound_reader.rate)
+
         frequency_scaled = self._scale_frequency_points(frequency)
         power_scaled = self._scale_power_points(power)
 
