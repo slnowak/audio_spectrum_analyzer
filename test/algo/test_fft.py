@@ -22,7 +22,7 @@ SOUND_SAMPLE = [
 class TestFft(TestCase):
     def test_fft_with_sound_sample(self):
         expected_fft_result = numpy.fft.fft(SOUND_SAMPLE, len(SOUND_SAMPLE))
-        fft_result = cyt.fourier(SOUND_SAMPLE,len(SOUND_SAMPLE))
+        fft_result = cyt.fourier(SOUND_SAMPLE, len(SOUND_SAMPLE))
 
         numpy.testing.assert_array_almost_equal(fft_result, expected_fft_result)
 
@@ -30,5 +30,5 @@ class TestFft(TestCase):
         random_data = numpy.random.random(1024)
         expected_fft_result = numpy.fft.fft(random_data, len(random_data))
 
-        numpy.testing.assert_array_almost_equal(expected_fft_result, cyt.fourier(random_data,len(random_data)))
+        numpy.testing.assert_array_almost_equal(expected_fft_result, cyt.fourier(random_data, len(random_data)))
 

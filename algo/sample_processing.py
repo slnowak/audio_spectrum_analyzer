@@ -23,7 +23,7 @@ def generate_frequency_points(sample_length, sample_frequency):
 
 def generate_power_points(sound_sample, sample_length):
     unique_points_number = get_unique_points_number(sample_length)
-    fft_data = fourier(sound_sample,len(sound_sample))[0:unique_points_number]
+    fft_data = fourier(sound_sample, len(sound_sample))[0:unique_points_number]
     fft_data = abs(fft_data)
     fft_data /= float(sample_length)
     fft_data **= 2
