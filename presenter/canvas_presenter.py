@@ -1,10 +1,10 @@
 from algo.sample_processing import prepare_trace
 from presenter.sound_reader import SoundReader
-from view.canvas_panel import LEFT_TOP_GRID_X_POSITION, GRID_WIDTH, GRID_HEIGHT, LEFT_TOP_GRID_Y_POSITION, ROWS, \
-    DECIBELS_PER_ROW
+from view.canvas_panel import LEFT_TOP_GRID_X_POSITION, GRID_WIDTH, GRID_HEIGHT, LEFT_TOP_GRID_Y_POSITION, ROWS
 
 __author__ = 'novy'
 
+DECIBELS_PER_ROW = 10
 CHUNK_SIZE = 1024
 
 
@@ -28,6 +28,8 @@ class CanvasPresenter(object):
         power_scaled = self._scale_power_points(power)
 
         self.canvas_view.draw_spectrum(
+            {'min': 0, 'max': 80},
+            {'min': 0, 'max': 22000},
             self._make_canvas_input(frequency_scaled, power_scaled)
         )
 
