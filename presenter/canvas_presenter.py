@@ -9,7 +9,6 @@ from view.canvas_panel import ROWS
 __author__ = 'novy'
 
 DECIBELS_PER_ROW = 10
-CHUNK_SIZE = 1024
 
 MIN_FREQUENCY = 0
 MAX_FREQUENCY = 22000
@@ -33,13 +32,16 @@ class CanvasPresenter(object):
         self.start_freq = MIN_FREQUENCY
         self.stop_freq = MAX_FREQUENCY
 
+    def get_sound_reader(self):
+        return self.sound_reader
+
     def drawing_loop(self):
-        audio_sample = self.read_sound_sample(CHUNK_SIZE)
+        audio_sample = self.read_sound_sample()
         self.draw_spectrum(audio_sample)
         self.canvas_view.do_after(10, self.drawing_loop)
 
-    def read_sound_sample(self, chunk_size):
-        return self.sound_reader.get_sound_sample(chunk_size)
+    def read_sound_sample(self):
+        return self.sound_reader.get_sound_sample()
 
     def draw_spectrum(self, sound_sample):
         frequency, power = prepare_trace(sound_sample, self.sound_reader.rate)
