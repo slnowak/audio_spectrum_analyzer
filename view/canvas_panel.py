@@ -42,9 +42,9 @@ class CanvasPanel(Frame):
         canvas.pack(side=TOP)
         return canvas
 
-    def draw_text(self):
-        info = "FFT samples: " + str(self.presenter.get_sound_reader().get_sample_size())
-        return self.canvas.create_text(CANVAS_WIDTH/2, LEFT_TOP_GRID_Y_POSITION/2, text=info, fill=GRID_COLOR)
+    def draw_text(self, sample_size):
+        info = "FFT samples: " + sample_size
+        return self.canvas.create_text(CANVAS_WIDTH / 2, LEFT_TOP_GRID_Y_POSITION / 2, text=info, fill=GRID_COLOR)
 
     def draw_grid(self, freq_range, db_range):
         self._draw_horizontal_lines(db_range)
@@ -94,9 +94,9 @@ class CanvasPanel(Frame):
         for line in lines:
             self.canvas.create_line(line, fill=GRID_COLOR)
 
-    def draw_spectrum(self, db_range, freq_range, spectrum):
+    def draw_spectrum(self, sample_size, db_range, freq_range, spectrum):
         self.clear_canvas()
-        self.draw_text()
+        self.draw_text(sample_size)
         self.draw_grid(freq_range, db_range)
         self.canvas.create_line(spectrum, fill=SPECTRUM_COLOR)
 
@@ -119,9 +119,9 @@ class CanvasPanel(Frame):
         self.end_freq_button = self.__init_button(button_caption="End freq", button_position=LEFT,
                                                   button_callback=self.presenter.read_stop_freq)
         self.dec_samples_button = self.__init_button(button_caption="Dec samples", button_position=RIGHT,
-                                                  button_callback=self.presenter.get_sound_reader().dec_samples)
+                                                     button_callback=self.presenter.get_sound_reader().dec_samples)
         self.inc_samples_button = self.__init_button(button_caption="Inc samples", button_position=RIGHT,
-                                                  button_callback=self.presenter.get_sound_reader().inc_samples)
+                                                     button_callback=self.presenter.get_sound_reader().inc_samples)
 
     def __init_button(self, button_caption, button_position, button_callback=None):
         button = Button(self, text=button_caption, width=BUTTON_WIDTH, command=button_callback)

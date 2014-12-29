@@ -55,6 +55,7 @@ class CanvasPresenter(object):
         power_scaled = self.grid_scaler.scale_power(filtered_power)
 
         self.canvas_view.draw_spectrum(
+            str(self.sound_reader.get_sample_size()),
             DEFAULT_POWER_RANGE,
             frequency_range,
             self._make_canvas_input(frequency_scaled, power_scaled)
