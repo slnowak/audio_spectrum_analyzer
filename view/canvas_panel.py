@@ -119,9 +119,9 @@ class CanvasPanel(Frame):
         self.end_freq_button = self.__init_button(button_caption="End freq", button_position=LEFT,
                                                   button_callback=self.presenter.read_stop_freq)
         self.dec_samples_button = self.__init_button(button_caption="Dec samples", button_position=RIGHT,
-                                                     button_callback=self.presenter.get_sound_reader().dec_samples)
+                                                     button_callback=self.presenter.dec_sample_size)
         self.inc_samples_button = self.__init_button(button_caption="Inc samples", button_position=RIGHT,
-                                                     button_callback=self.presenter.get_sound_reader().inc_samples)
+                                                     button_callback=self.presenter.inc_sample_size)
 
     def __init_button(self, button_caption, button_position, button_callback=None):
         button = Button(self, text=button_caption, width=BUTTON_WIDTH, command=button_callback)

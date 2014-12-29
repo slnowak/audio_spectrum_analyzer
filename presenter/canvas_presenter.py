@@ -79,6 +79,12 @@ class CanvasPresenter(object):
         if parsed_stop_freq is not None and frequency_range_valid(self.start_freq, parsed_stop_freq):
             self.stop_freq = parsed_stop_freq
 
+    def inc_sample_size(self):
+        self.sound_reader.inc_samples()
+
+    def dec_sample_size(self):
+        self.sound_reader.dec_samples()
+
 
 def frequency_range_valid(start_freq, stop_freq):
     return MIN_FREQUENCY <= start_freq <= stop_freq <= MAX_FREQUENCY
