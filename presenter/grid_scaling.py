@@ -65,8 +65,8 @@ class PowerPointsScaler(object):
         scaled = []
 
         for power in with_negative_power_replaced:
-            pos = int(self.grid_height + 20 + pixels_per_decibel * (self.db_level - power))
-            max_pos = self.grid_height + 20
+            pos = int(self.grid_height + self.left_top_y + pixels_per_decibel * (self.db_level - power))
+            max_pos = self.grid_height + self.left_top_y
             if pos > max_pos:
                 pos = max_pos
             scaled.append(pos)
