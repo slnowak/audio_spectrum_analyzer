@@ -1,6 +1,8 @@
 from Tkconstants import RIDGE, TOP, X, RIGHT, LEFT
 from Tkinter import Frame, Canvas, Button
+
 from view.bottom_panel import BUTTON_WIDTH
+
 
 __author__ = 'novy'
 
@@ -115,9 +117,9 @@ class CanvasPanel(Frame):
 
     def _init_buttons(self):
         self.start_button = self.__init_button(button_caption="Start", button_position=LEFT,
-                                                     button_callback=self.presenter.start_sweep)
+                                               button_callback=self.presenter.start_sweep)
         self.stop_button = self.__init_button(button_caption="Stop", button_position=LEFT,
-                                                     button_callback=self.presenter.stop_sweep)
+                                              button_callback=self.presenter.stop_sweep)
         self.start_freq_button = self.__init_button(button_caption="Start freq", button_position=LEFT,
                                                     button_callback=self.presenter.read_start_freq)
         self.end_freq_button = self.__init_button(button_caption="End freq", button_position=LEFT,
@@ -127,13 +129,13 @@ class CanvasPanel(Frame):
         self.inc_samples_button = self.__init_button(button_caption="Inc samples", button_position=RIGHT,
                                                      button_callback=self.presenter.inc_sample_size)
         self.db_div_up_button = self.__init_button(button_caption="+db/div", button_position=LEFT,
-                                                     button_callback=self.presenter.inc_decibel_div)
+                                                   button_callback=self.presenter.inc_decibel_div)
         self.db_div_down_button = self.__init_button(button_caption="-db/div", button_position=LEFT,
                                                      button_callback=self.presenter.dec_decibel_div)
         self.db_level_up_button = self.__init_button(button_caption="+db level", button_position=LEFT,
                                                      button_callback=self.presenter.inc_db_level)
         self.db_level_down_button = self.__init_button(button_caption="-db level", button_position=LEFT,
-                                                     button_callback=self.presenter.dec_db_level)
+                                                       button_callback=self.presenter.dec_db_level)
 
     def __init_button(self, button_caption, button_position, button_callback=None):
         button = Button(self, text=button_caption, width=BUTTON_WIDTH, command=button_callback)

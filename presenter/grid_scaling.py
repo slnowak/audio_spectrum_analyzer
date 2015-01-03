@@ -4,7 +4,7 @@ __author__ = 'novy'
 
 
 class GridScaler(object):
-    def __init__(self, power_per_row,db_level, grid_width=GRID_WIDTH, grid_height=GRID_HEIGHT,
+    def __init__(self, power_per_row, db_level, grid_width=GRID_WIDTH, grid_height=GRID_HEIGHT,
                  left_top_x=LEFT_TOP_GRID_X_POSITION, left_top_y=LEFT_TOP_GRID_X_POSITION,
                  rows=ROWS, columns=COLUMNS, ):
         super(GridScaler, self).__init__()

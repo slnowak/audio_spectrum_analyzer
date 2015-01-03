@@ -1,5 +1,7 @@
 from unittest.case import TestCase
+
 from algo.frequency_filtering import FrequencyFilterer
+
 
 __author__ = 'novy'
 

@@ -1,5 +1,4 @@
 from presenter.canvas_presenter import CanvasPresenter
-from view.bottom_panel import BottomPanel
 from view.canvas_panel import CanvasPanel
 from view.top_panel import TopPanel
 

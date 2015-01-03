@@ -1,5 +1,7 @@
 from unittest.case import TestCase
+
 from presenter.int_parser import IntParser
+
 
 __author__ = 'novy'
 

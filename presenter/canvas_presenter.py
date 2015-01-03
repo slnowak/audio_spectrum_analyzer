@@ -1,10 +1,12 @@
 from tkSimpleDialog import askstring
+
 from algo.frequency_filtering import FrequencyFilterer
 from algo.sample_processing import prepare_trace
 from presenter.grid_scaling import GridScaler
 from presenter.int_parser import IntParser
 from presenter.sound_reader import SoundReader
 from view.canvas_panel import ROWS
+
 
 __author__ = 'novy'
 
@@ -47,28 +49,28 @@ class CanvasPresenter(object):
 
     def dec_decibel_div(self):
         if self.decibel_index > 0:
-            self.decibel_index = self.decibel_index - 1
+            self.decibel_index -= 1
             DEFAULT_POWER_RANGE["max"] = ROWS * self.decibels_div_list[self.decibel_index] + DEFAULT_POWER_RANGE["min"]
             self.grid_scaler.set_power_per_row(self.decibels_div_list[self.decibel_index])
 
     def inc_decibel_div(self):
-        if self.decibel_index< len(self.decibels_div_list) - 1:
-            self.decibel_index = self.decibel_index + 1
+        if self.decibel_index < len(self.decibels_div_list) - 1:
+            self.decibel_index += 1
             DEFAULT_POWER_RANGE["max"] = ROWS * self.decibels_div_list[self.decibel_index] + DEFAULT_POWER_RANGE["min"]
             self.grid_scaler.set_power_per_row(self.decibels_div_list[self.decibel_index])
 
     def inc_db_level(self):
         if self.decibel_level < MAX_LEVEL:
-            self.decibel_level = self.decibel_level + LEVEL_STEP
+            self.decibel_level += LEVEL_STEP
             DEFAULT_POWER_RANGE["min"] = self.decibel_level
-            DEFAULT_POWER_RANGE["max"] = DEFAULT_POWER_RANGE["max"] + LEVEL_STEP
+            DEFAULT_POWER_RANGE["max"] += LEVEL_STEP
             self.grid_scaler.set_db_level(self.decibel_level)
 
     def dec_db_level(self):
         if self.decibel_level > 0:
-            self.decibel_level = self.decibel_level - LEVEL_STEP
+            self.decibel_level -= LEVEL_STEP
             DEFAULT_POWER_RANGE["min"] = self.decibel_level
-            DEFAULT_POWER_RANGE["max"] = DEFAULT_POWER_RANGE["max"] - LEVEL_STEP
+            DEFAULT_POWER_RANGE["max"] -= LEVEL_STEP
             self.grid_scaler.set_db_level(self.decibel_level)
 
     def get_sound_reader(self):
@@ -127,5 +129,3 @@ class CanvasPresenter(object):
 
 def frequency_range_valid(start_freq, stop_freq):
     return MIN_FREQUENCY <= start_freq <= stop_freq <= MAX_FREQUENCY
-
-

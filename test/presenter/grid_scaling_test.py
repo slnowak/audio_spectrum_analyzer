@@ -1,5 +1,7 @@
 from unittest.case import TestCase
+
 from presenter.grid_scaling import FrequencyPointsScaler, PowerPointsScaler
+
 
 __author__ = 'novy'
 
@@ -29,7 +31,8 @@ class PowerPointsScalerTest(TestCase):
         self.rows = 10
         self.power_per_row = 10
         self.db_level = 0
-        self.object_under_test = PowerPointsScaler(self.grid_height, self.left_top_y, self.rows, self.power_per_row, self.db_level)
+        self.object_under_test = PowerPointsScaler(self.grid_height, self.left_top_y, self.rows, self.power_per_row,
+                                                   self.db_level)
 
     def test_points_with_zero_or_negative_value_should_be_on_bottom_of_the_screen(self):
         power_points = [0, -14.2, 0, -5]
