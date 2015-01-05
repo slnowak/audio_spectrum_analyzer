@@ -5,7 +5,7 @@ __author__ = 'novy'
 
 
 class SoundReader():
-    def __init__(self, audio_format=pyaudio.paInt16, channels=1, rate=44100):
+    def __init__(self, audio_format=pyaudio.paInt16, channels=1, rate=44000):
         self.py_audio = pyaudio.PyAudio()
         self.format, self.channels, self.rate = audio_format, channels, rate
         self.sample_sizes = [64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536]
@@ -37,4 +37,10 @@ class SoundReader():
 
     def get_sample_size(self):
         return self.sample_sizes[self.size_index]
+
+    def get_sample_rate(self):
+        return self.rate
+
+    def set_sample_rate(self, new_rate):
+        self.rate = new_rate
 

@@ -18,13 +18,8 @@ class TopPanel(Frame):
 
         self.pack(side=TOP, expand=1, fill=X)
 
-        self.__add_buttons()
-
-    def __add_buttons(self):
-        self.setup_button = Button(self, text="Setup", width=BUTTON_WIDTH)
+    def add_buttons(self, callback):
+        self.setup_button = Button(self, text="Sample rate", width=BUTTON_WIDTH, command = callback)
         self.setup_button.pack(side=RIGHT, padx=5, pady=5)
-
-        self.audio_on_off_button = Button(self, text="Audio on/off", width=BUTTON_WIDTH)
-        self.audio_on_off_button.pack(side=RIGHT, padx=5, pady=5)
 
 

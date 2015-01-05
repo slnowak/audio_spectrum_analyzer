@@ -22,6 +22,7 @@ class MainWindow(object):
         self.top_panel = TopPanel(self.main_window)
         # todo: fix
         canvas_presenter = CanvasPresenter()
+        self.top_panel.add_buttons(canvas_presenter.set_sample_rate)
         self.canvas_panel = CanvasPanel(self.main_window, presenter=canvas_presenter)
         canvas_presenter.canvas_view = self.canvas_panel
         canvas_presenter.drawing_loop()

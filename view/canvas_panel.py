@@ -44,8 +44,8 @@ class CanvasPanel(Frame):
         canvas.pack(side=TOP)
         return canvas
 
-    def draw_text(self, sample_size):
-        info = "FFT samples: " + sample_size
+    def draw_text(self, sample_rate, sample_size):
+        info = "Sample rate: " + sample_rate + "\t FFT samples: " + sample_size
         return self.canvas.create_text(CANVAS_WIDTH / 2, LEFT_TOP_GRID_Y_POSITION / 2, text=info, fill=GRID_COLOR)
 
     def draw_grid(self, freq_range, db_range):
@@ -96,9 +96,9 @@ class CanvasPanel(Frame):
         for line in lines:
             self.canvas.create_line(line, fill=GRID_COLOR)
 
-    def draw_spectrum(self, sample_size, db_range, freq_range, spectrum):
+    def draw_spectrum(self, sample_rate, sample_size, db_range, freq_range, spectrum):
         self.clear_canvas()
-        self.draw_text(sample_size)
+        self.draw_text(sample_rate, sample_size)
         self.draw_grid(freq_range, db_range)
         self.canvas.create_line(spectrum, fill=SPECTRUM_COLOR)
 

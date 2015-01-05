@@ -15,9 +15,6 @@ DECIBEL_LEVEL = 0
 MAX_LEVEL = 200
 LEVEL_STEP = 10
 
-MIN_FREQUENCY = 0
-MAX_FREQUENCY = 22000
-
 DEFAULT_POWER_RANGE = {
     'min': 0, 'max': ROWS * DECIBELS_PER_ROW
 }
@@ -38,8 +35,8 @@ class CanvasPresenter(object):
         self.decibel_index = 4
         self.decibel_level = 0
 
-        self.start_freq = MIN_FREQUENCY
-        self.stop_freq = MAX_FREQUENCY
+        self.start_freq = 0
+        self.stop_freq = self.sound_reader.get_sample_rate()/2
 
     def stop_sweep(self):
         self.running = 0
@@ -96,6 +93,7 @@ class CanvasPresenter(object):
         frequency_scaled = self.grid_scaler.scale_frequency(filtered_freq)
         power_scaled = self.grid_scaler.scale_power(filtered_power)
         self.canvas_view.draw_spectrum(
+            str(self.sound_reader.get_sample_rate()),
             str(self.sound_reader.get_sample_size()),
             DEFAULT_POWER_RANGE,
             frequency_range,
@@ -111,13 +109,13 @@ class CanvasPresenter(object):
     def read_start_freq(self):
         start_freq_string = askstring("Start frequency: ", "Value: " + str(self.start_freq) + " Hz\n\nNew value:\n")
         parsed_start_freq = self.int_parser.parse(start_freq_string)
-        if parsed_start_freq is not None and frequency_range_valid(parsed_start_freq, self.stop_freq):
+        if parsed_start_freq is not None and self.frequency_range_valid(parsed_start_freq, self.stop_freq):
             self.start_freq = parsed_start_freq
 
     def read_stop_freq(self):
         stop_freq_string = askstring("Stop : ", "Value: " + str(self.stop_freq) + " Hz\n\nNew value:\n")
         parsed_stop_freq = self.int_parser.parse(stop_freq_string)
-        if parsed_stop_freq is not None and frequency_range_valid(self.start_freq, parsed_stop_freq):
+        if parsed_stop_freq is not None and self.frequency_range_valid(self.start_freq, parsed_stop_freq):
             self.stop_freq = parsed_stop_freq
 
     def inc_sample_size(self):
@@ -126,6 +124,18 @@ class CanvasPresenter(object):
     def dec_sample_size(self):
         self.sound_reader.dec_samples()
 
+    def frequency_range_valid(self, start_freq, stop_freq):
+        return 0 <= start_freq <= stop_freq <= self.sound_reader.get_sample_rate()/2
 
-def frequency_range_valid(start_freq, stop_freq):
-    return MIN_FREQUENCY <= start_freq <= stop_freq <= MAX_FREQUENCY
+    def set_sample_rate(self):
+        value = askstring("Sample rate","Sample rate of soundcard.\n\nValue: " + str(self.sound_reader.get_sample_rate()) + "\n\nNew value:\n(6000, 12000, 24000, 48000, 96000, 192000)")
+        if value == None:
+            return()
+        try:
+            new_rate = int(value)
+        except:
+            value = "error"
+        if value != "error":
+            self.sound_reader.set_sample_rate(new_rate)
+            self.start_freq = 0
+            self.stop_freq = self.sound_reader.get_sample_rate()/2
