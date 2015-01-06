@@ -36,7 +36,7 @@ class CanvasPresenter(object):
         self.decibel_level = 0
 
         self.start_freq = 0
-        self.stop_freq = self.sound_reader.get_sample_rate()/2
+        self.stop_freq = self.sound_reader.get_sample_rate() / 2
 
     def stop_sweep(self):
         self.running = 0
@@ -125,12 +125,13 @@ class CanvasPresenter(object):
         self.sound_reader.dec_samples()
 
     def frequency_range_valid(self, start_freq, stop_freq):
-        return 0 <= start_freq <= stop_freq <= self.sound_reader.get_sample_rate()/2
+        return 0 <= start_freq <= stop_freq <= self.sound_reader.get_sample_rate() / 2
 
     def set_sample_rate(self):
-        value = askstring("Sample rate","Sample rate of soundcard.\n\nValue: " + str(self.sound_reader.get_sample_rate()) + "\n\nNew value:\n(6000, 12000, 24000, 48000, 96000, 192000)")
+        value = askstring("Sample rate", "Sample rate of soundcard.\n\nValue: " + str(
+            self.sound_reader.get_sample_rate()) + "\n\nNew value:\n(6000, 12000, 24000, 48000, 96000, 192000)")
         if value == None:
-            return()
+            return ()
         try:
             new_rate = int(value)
         except:
@@ -138,4 +139,4 @@ class CanvasPresenter(object):
         if value != "error":
             self.sound_reader.set_sample_rate(new_rate)
             self.start_freq = 0
-            self.stop_freq = self.sound_reader.get_sample_rate()/2
+            self.stop_freq = self.sound_reader.get_sample_rate() / 2

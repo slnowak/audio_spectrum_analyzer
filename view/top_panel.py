@@ -19,7 +19,7 @@ class TopPanel(Frame):
         self.pack(side=TOP, expand=1, fill=X)
 
     def add_buttons(self, callback):
-        self.setup_button = Button(self, text="Sample rate", width=BUTTON_WIDTH, command = callback)
+        self.setup_button = Button(self, text="Sample rate", width=BUTTON_WIDTH, command=callback)
         self.setup_button.pack(side=RIGHT, padx=5, pady=5)
 
 
