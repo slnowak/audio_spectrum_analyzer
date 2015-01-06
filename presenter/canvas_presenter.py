@@ -128,15 +128,12 @@ class CanvasPresenter(object):
         return 0 <= start_freq <= stop_freq <= self.sound_reader.get_sample_rate() / 2
 
     def set_sample_rate(self):
-        value = askstring("Sample rate", "Sample rate of soundcard.\n\nValue: " + str(
+        value_string = askstring("Sample rate", "Sample rate of soundcard.\n\nValue: " + str(
             self.sound_reader.get_sample_rate()) + "\n\nNew value:\n(6000, 12000, 24000, 48000, 96000, 192000)")
-        if value == None:
-            return ()
-        try:
-            new_rate = int(value)
-        except:
-            value = "error"
-        if value != "error":
-            self.sound_reader.set_sample_rate(new_rate)
+
+        parsed_value = self.int_parser.parse(value_string)
+
+        if parsed_value is not None:
+            self.sound_reader.set_sample_rate(parsed_value)
             self.start_freq = 0
             self.stop_freq = self.sound_reader.get_sample_rate() / 2

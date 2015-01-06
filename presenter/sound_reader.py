@@ -29,11 +29,11 @@ class SoundReader():
 
     def dec_samples(self):
         if self.size_index > 0:
-            self.size_index = self.size_index - 1
+            self.size_index -= 1
 
     def inc_samples(self):
         if self.size_index < len(self.sample_sizes) - 1:
-            self.size_index = self.size_index + 1
+            self.size_index += 1
 
     def get_sample_size(self):
         return self.sample_sizes[self.size_index]
